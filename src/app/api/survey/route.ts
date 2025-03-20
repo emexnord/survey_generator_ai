@@ -1,4 +1,4 @@
-import { createSurvey } from "@/src/utils/api";
+import { createSurvey } from "@/src/utils/survey_service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -15,6 +15,6 @@ export async function POST(req: NextRequest) {
     const survey = await createSurvey(data);
     return NextResponse.json(survey, { status: 201 });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

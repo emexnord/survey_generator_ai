@@ -10,3 +10,8 @@ export interface SurveyResponseDto {
   questions: Question[];
   createdAt: Date;
 }
+
+export interface createSurveyDto {
+  title: string;
+  questions: Question[];
+}

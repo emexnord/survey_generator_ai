@@ -7,13 +7,6 @@ generator client {
     provider = "prisma-client-js"
 }
 
-model Product {
-    id        String   @id @default(cuid()) @map("_id") @db.ObjectId
-    title     String
-    price     Float?
-    createdAt DateTime @default(now())
-}
-
 model Survey {
     id        String     @id @default(auto()) @map("_id") @db.ObjectId
     title     String

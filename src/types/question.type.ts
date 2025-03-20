@@ -7,7 +7,7 @@ export type Question = {
     | "MULTIPLE_CHOICE"
     | "CHECKBOXES"
     | "DROPDOWN"
-    | "IMAGE_UPLOAD";
+    | "IMAGE_UPLOAD"; // for example,in social media reporting
   options?: string[]; // Required for MULTIPLE_CHOICE, CHECKBOXES, and DROPDOWN
   required: boolean;
 };
