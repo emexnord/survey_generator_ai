@@ -1,6 +1,5 @@
 import BlurIn from "./magicui/blur-in";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
-import TypingAnimation from "./ui/typing-animation";
 
 const Hero = () => {
   return (
@@ -16,8 +15,7 @@ const Hero = () => {
             word={
               "Effortlessly generate high-quality survey questions from a simple title using AI. Save time, enhance accuracy, and get the insights you need—instantly."
             }
-            className="text-center py-5        
-            text-lg md:tracking-wider mt-2 mb-4 md:text-lg lg:text-2xl"
+            className="text-center py-5 mt-2 mb-4 text-lg md:text-2xl lg:text-4xl drop-shadow-sm  "
           />
         </div>
       </div>

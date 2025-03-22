@@ -5,6 +5,6 @@ export interface Survey {
   id: string;
   title: string;
   questions: Question[];
-  responses: Response[];
+  responses?: Response[];
   createdAt: Date;
 }
