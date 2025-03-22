@@ -16,6 +16,7 @@ import { IoSend, IoShareSocial } from "react-icons/io5";
 export default function SurveyPage() {
   const searchParams = useSearchParams();
   const [title, setTitle] = useState(searchParams.get("title") || "");
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [questionLoading, setQuestionLoading] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -40,6 +41,8 @@ export default function SurveyPage() {
       });
       const data = await response.json();
       setSurvey(data);
+      setTitle(data.title);
+      setQuestions(data.questions);
     } catch (error) {
       console.error("Error fetching survey:", error);
     } finally {
@@ -69,13 +72,9 @@ export default function SurveyPage() {
       });
 
       if (response.ok) {
-        toast.success("Responses submitted successfully!", {
-          position: "top-center",
-        });
+        toast.success("Responses submitted successfully!");
       } else {
-        toast.error("Failed to submit responses. Please try again.", {
-          position: "top-center",
-        });
+        toast.error("Failed to submit responses. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting responses:", error);
@@ -86,8 +85,8 @@ export default function SurveyPage() {
   }
 
   function handleSubmit() {
+    console.log("yaaaaa");
     if (!title.trim()) return;
-    setTitle("");
     fetchSurvey(title);
   }
 
