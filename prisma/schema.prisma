@@ -1,0 +1,25 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Survey {
+    id        String     @id @default(auto()) @map("_id") @db.ObjectId
+    title     String
+    questions Json
+    responses Response[]
+    createdAt DateTime   @default(now())
+}
+
+model Response {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userEmail String?  @unique // applicable if you want to track responses by user
+    surveyId  String   @db.ObjectId
+    answers   Json
+    createdAt DateTime @default(now())
+    Survey    Survey   @relation(fields: [surveyId], references: [id])
+}
