@@ -1,3 +1,4 @@
+import { IconType } from "react-icons/lib";
 import { cn } from "../lib/utils";
 import { ReactNode } from "react";
 
@@ -26,13 +27,11 @@ const BentoCard = ({
   background,
   Icon,
   description,
-  href,
-  cta,
 }: {
   name: string;
   className: string;
   background: ReactNode;
-  Icon: any;
+  Icon: IconType;
   description: string;
   href: string;
   cta: string;

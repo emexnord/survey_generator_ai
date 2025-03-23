@@ -31,7 +31,7 @@ export default function TypingAnimation({
     return () => {
       clearInterval(typingEffect);
     };
-  }, [duration, i]);
+  }, [duration, i, text]);
 
   return (
     <motion.h1
@@ -42,15 +42,15 @@ export default function TypingAnimation({
       initial="hidden"
       whileInView="animate"
       animate={{
-        opacity: 1
+        opacity: 1,
       }}
       viewport={{ once: true }}
       transition={{
-        delay: 1
+        delay: 1,
       }}
       className={cn(
         "font-display uppercase text-center text-4xl font-bold leading-[5rem] tracking-[-0.02em] drop-shadow-sm",
-        className,
+        className
       )}
     >
       {displayedText ? displayedText : text}

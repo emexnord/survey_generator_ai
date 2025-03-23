@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import * as React from "react";
 import { SVGProps, useEffect, useState } from "react";
@@ -19,7 +20,7 @@ const Logo = (props: SVGProps<SVGSVGElement>) => {
 
   return (
     <div
-      className="font-bold tracking-wide"
+      className={cn("font-bold tracking-wide", props.className)}
       style={{
         fontSize: 20,
         color: color,

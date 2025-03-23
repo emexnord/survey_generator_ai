@@ -2,13 +2,12 @@ import { AppError } from "../../../../errors";
 import { getResponseById } from "../../../../utils/response_service";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+type idParam = Promise<{ id: string }>;
+
+export async function GET(req: NextRequest, { params }: { params: idParam }) {
   try {
     const { id } = await params;
-    // console.log(id);
+    console.log(id);
     const response = await getResponseById(id);
 
     return NextResponse.json(response, { status: 200 });

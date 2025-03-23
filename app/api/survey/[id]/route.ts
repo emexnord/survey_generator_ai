@@ -2,10 +2,9 @@ import { AppError } from "../../../../errors";
 import { getSurveyById } from "../../../../utils/survey_service";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+type idParam = Promise<{ id: string }>;
+
+export async function GET(req: NextRequest, { params }: { params: idParam }) {
   try {
     const { id } = await params;
     const survey = await getSurveyById(id);

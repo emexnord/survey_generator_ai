@@ -42,13 +42,13 @@ export default function SurveyPage() {
   }
 
   async function handleSurveySubmit(responses: Answer[]) {
-    console.log(
-      "Survey Submitted:",
-      JSON.stringify({
-        surveyId,
-        answers: responses,
-      })
-    );
+    // console.log(
+    //   "Survey Submitted:",
+    //   JSON.stringify({
+    //     surveyId,
+    //     answers: responses,
+    //   })
+    // );
     try {
       const response = await fetch("/api/response", {
         method: "POST",

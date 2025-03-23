@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Survey Generator
 
-## Getting Started
+## 📌 Introduction
 
-First, run the development server:
+**AI Survey Generator** is a Next.js application that allows users to input a title and generate five AI-driven questions of various types, such as:
+
+- Multiple-choice questions
+- Short or long paragraph responses
+- Dropdown options
+- Image uploads
+
+Users can then submit their responses, which are securely stored in a **MongoDB Atlas** database.
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1️⃣ Clone the Repository
+
+```bash
+git https://github.com/emrankamil/survey_generator_ai
+cd survey_generator_ai
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Set Up Environment Variables
+
+Create a `.env.local` file in the project root and add the following values:
+
+```env
+DATABASE_URL="mongodb+srv://<username>:<password>@<mongo-atlas-database>"
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXTAUTH_URL="http://localhost:3000"
+GEMINI_API_KEY=
+AUTH_SECRET=
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
+```
+
+> **To get a Gemini API Key:**
+>
+> - Go to [Google AI Studio](https://aistudio.google.com/prompts/new_chat)
+> - Click the **top-right corner** to generate an API key
+> - Paste it into `GEMINI_API_KEY` in your `.env.local` file
+
+### 4️⃣ Generate Prisma Client
+
+```bash
+npx prisma generate
+```
+
+### 5️⃣ Run the Application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 6️⃣ Open in Browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit: [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend & Backend:** [Next.js 15.2.3](https://nextjs.org/)
+- **AI API:** [Gemini 2.0 Flash](https://ai.google.dev/)
+- **Database & ORM:** MongoDB Atlas with [Prisma](https://www.prisma.io/)
+- **Authentication:** [NextAuth.js (Auth.js)](https://authjs.dev/) with Google OAuth
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Dark Mode:** [Next Themes](https://www.npmjs.com/package/next-themes)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Project Structure
 
-## Deploy on Vercel
+📂 **Backend:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- API endpoints for **survey generation** and **response submission**
+- **Security & error handling** to ensure proper responses and fallback methods
+- **Clean Architecture:**
+  - Controllers → `/app/api`
+  - Services → `/utils`
+  - Entities & Repositories → `/prisma`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📂 **Frontend:**
+
+- **Tailwind CSS** for styling
+- **Dark Mode** using Next-Themes
+- **Google OAuth authentication** via NextAuth.js
+- **Framer Motion** for smooth animations
+
+---
+
+## 📸 Screenshots
+
+---
+
+## 🛡️ Security & Best Practices
+
+- **Secure API endpoints** with input validation and proper error handling
+- **Dependency Injection** for better modularity and maintainability
+- **Strict TypeScript usage** (if applicable)
+
+---

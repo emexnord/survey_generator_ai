@@ -4,13 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 
 import { NavigationMenu, NavigationMenuList } from "./ui/navigation-menu";
-import { useTheme } from "next-themes";
 import Logo from "./logo";
 import { Button } from "./ui/button";
 
 export function MainNav() {
-  const { theme } = useTheme();
-
   return (
     <div className="mr-4 md:flex">
       <Link href="/" className="lg:mr-6 sm:mr-4 flex items-center gap-2">

@@ -47,7 +47,7 @@ export default function SurveyForm({ questions, onSubmit }: SurveyFormProps) {
             "transform-gpu dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]"
           )}
         >
-          <label className="font-medium block mb-2">
+          <label className="block mb-2">
             {question.text}
             {question.required && <span className="text-red-500"> *</span>}
           </label>

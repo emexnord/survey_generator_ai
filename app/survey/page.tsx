@@ -5,7 +5,6 @@ import GridPattern from "@/components/ui/animted-grid";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Answer } from "@/types/answer.type";
-import { Question } from "@/types/question.type";
 import { Survey } from "@/types/survey.type";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -15,22 +14,18 @@ import { IoSend, IoShareSocial } from "react-icons/io5";
 
 export default function SurveyPage() {
   const searchParams = useSearchParams();
-  const [title, setTitle] = useState(searchParams.get("title") || "");
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [title, setTitle] = useState("");
+  // const [questions, setQuestions] = useState<Question[]>([]);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [questionLoading, setQuestionLoading] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Fetch questions when title is present
-  useEffect(() => {
-    if (title) {
-      fetchSurvey(title);
-    }
-    setLoading(false);
-  }, [searchParams]);
 
   async function fetchSurvey(title: string) {
+    setSurvey(null);
     setQuestionLoading(true);
+
     try {
       const response = await fetch(`/api/survey`, {
         method: "POST",
@@ -42,7 +37,7 @@ export default function SurveyPage() {
       const data = await response.json();
       setSurvey(data);
       setTitle(data.title);
-      setQuestions(data.questions);
+      // setQuestions(data.questions);
     } catch (error) {
       console.error("Error fetching survey:", error);
     } finally {
@@ -85,7 +80,6 @@ export default function SurveyPage() {
   }
 
   function handleSubmit() {
-    console.log("yaaaaa");
     if (!title.trim()) return;
     fetchSurvey(title);
   }
@@ -96,6 +90,15 @@ export default function SurveyPage() {
       handleSubmit();
     }
   };
+
+  useEffect(() => {
+    const title = searchParams.get("title");
+
+    if (title) {
+      fetchSurvey(title);
+    }
+    setLoading(false);
+  }, [searchParams]);
 
   if (loading) {
     return (
@@ -110,12 +113,42 @@ export default function SurveyPage() {
     );
   }
 
+  if (questionLoading) {
+    return (
+      <div className="h-full w-full">
+        <div className="relative w-full h-full">
+          <GridPattern width={70} height={70} />
+          <div className="p-6 max-w-2xl mx-auto h-screen relative z-10">
+            <div className="p-5 rounded mb-10 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 flex justify-between w-full">
+              <div>
+                <h1 className="text-2xl font-bold">Title:</h1>
+                <h1 className="text-xl">{title}</h1>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center p-6">
+              <div className="h-4 w-48 bg-gray-300 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
+              <div className="h-4 w-64 bg-gray-300 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
+
+              <p className="text-gray-500 mt-4 flex items-center gap-1">
+                Generating survey
+                <span className="animate-bounce">.</span>
+                <span className="animate-bounce delay-200">.</span>
+                <span className="animate-bounce delay-400">.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-full w-full">
       <div className="relative w-full h-full">
         <GridPattern width={70} height={70} />
-        <div className="w-full h-screen z-10 relative">
-          {questionLoading || survey ? (
+        <div className="w-full h-full z-10 relative">
+          {survey ? (
             <div className="p-6 max-w-2xl mx-auto">
               <div className="p-5 rounded mb-10 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 flex justify-between w-full">
                 <div>
@@ -133,24 +166,11 @@ export default function SurveyPage() {
                 </Button>
               </div>
 
-              {survey ? (
-                <SurveyForm
-                  questions={survey.questions}
-                  onSubmit={handleSurveySubmit}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center p-6">
-                  <div className="h-4 w-48 bg-gray-300 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-                  <div className="h-4 w-64 bg-gray-300 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
+              <SurveyForm
+                questions={survey.questions}
+                onSubmit={handleSurveySubmit}
+              />
 
-                  <p className="text-gray-500 mt-4 flex items-center gap-1">
-                    Generating survey
-                    <span className="animate-bounce">.</span>
-                    <span className="animate-bounce delay-200">.</span>
-                    <span className="animate-bounce delay-400">.</span>
-                  </p>
-                </div>
-              )}
               {/* new survey generator */}
               <div
                 className={cn(
