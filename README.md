@@ -18,7 +18,7 @@ Users can then submit their responses, which are securely stored in a **MongoDB 
 ### 1️⃣ Clone the Repository
 
 ```bash
-git https://github.com/emrankamil/survey_generator_ai
+git clone https://github.com/emrankamil/survey_generator_ai
 cd survey_generator_ai
 ```
 
@@ -99,6 +99,12 @@ Visit: [http://localhost:3000](http://localhost:3000)
 ---
 
 ## 📸 Screenshots
+
+![image](https://github.com/user-attachments/assets/a76c02fc-c82d-4cc1-a3d4-343d56a1d175)
+![image](https://github.com/user-attachments/assets/ecddf46a-b26c-4a68-8c01-313fa60e800f)
+![image](https://github.com/user-attachments/assets/81c7e8ed-d9aa-4586-a457-ed9234268dec)
+![image](https://github.com/user-attachments/assets/ae5318b3-c670-40db-8038-9c6bdb36a738)
+
 
 ---
 
