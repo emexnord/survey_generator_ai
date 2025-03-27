@@ -4,11 +4,11 @@ import Google from "next-auth/providers/google";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ account }) {
       if (account?.provider === "google") {
         // Ensure user exists or create them
         const res: any = await fetch(
-          `/api/user/google/?token${account?.id_token}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/google/?token=${account?.id_token}`,
           {
             method: "GET",
             headers: {
@@ -18,7 +18,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
 
         const dbUser = await res.json();
-        console.log("db user", dbUser);
 
         if (!dbUser?.user) return false;
 
@@ -31,7 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, account }) {
       if (account?.provider === "google") {
         const res: any = await fetch(
-          `/api/user/google/?token=${account?.id_token}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/google/?token=${account?.id_token}`,
           {
             method: "GET",
             headers: {
@@ -41,7 +40,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
         const dbUser = await res.json();
 
-        if (dbUser) return { token: dbUser.token, user: dbUser.user };
+        if (dbUser) {
+          token.accessToken = dbUser.tokens.accessToken;
+          token.refreshToken = dbUser.tokens.refreshToken;
+          token.email = dbUser.user.email;
+        }
       }
 
       return token;

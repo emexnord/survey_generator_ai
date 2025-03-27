@@ -54,16 +54,17 @@ export async function handleGoogleUser(token: string): Promise<{
     });
 
     const payload = ticket.getPayload();
-    const { email, username } = payload as any;
+    const { email, name } = payload as any;
 
     let user = await getUserByEmail(email);
 
     if (!user) {
       // Create new user without password
-      user = await createUserInDb({ name: username, email, password: "" });
+      user = await createUserInDb({ name, email, password: "" });
     }
 
     const tokens = generateTokens(user.id, user.email);
+    // console.log("generated tokens", tokens);
     return { user: exclude(user, ["password"]), tokens };
   } catch (error) {
     console.error("Error in verifying google token:", error);

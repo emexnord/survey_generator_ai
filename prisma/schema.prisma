@@ -18,7 +18,7 @@ model Survey {
 
 model Response {
     id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    userEmail String?  @unique // applicable if you want to track responses by user
+    userEmail String? // applicable if you want to track responses by user
     surveyId  String   @db.ObjectId
     answers   Json
     createdAt DateTime @default(now())
