@@ -24,3 +24,21 @@ export interface createResponseDto {
   userEmail?: string;
   answers: Answer[];
 }
+
+export interface createUserDto {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface userDto {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+}
+
+export interface loginDto {
+  email: string;
+  password: string;
+}

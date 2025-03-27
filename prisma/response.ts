@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { Answer } from "../types/answer.type";
-import { AppError } from "../errors";
 
 const prisma = new PrismaClient();
 
