@@ -4,6 +4,7 @@ import SurveyForm from "@/components/SurveyForm";
 import GridPattern from "@/components/ui/animted-grid";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useSession } from "@/providers/SessionProviderClient";
 import { Answer } from "@/types/answer.type";
 import { Survey } from "@/types/survey.type";
 import { useSearchParams } from "next/navigation";
@@ -13,6 +14,7 @@ import toast from "react-hot-toast";
 import { IoSend, IoShareSocial } from "react-icons/io5";
 
 export default function SurveyPage() {
+  const session = useSession();
   const searchParams = useSearchParams();
   const [title, setTitle] = useState("");
   // const [questions, setQuestions] = useState<Question[]>([]);
@@ -31,10 +33,24 @@ export default function SurveyPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.accessToken}`,
         },
         body: JSON.stringify({ title }),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch survey");
+      }
+      // await setToken(session?.accessToken || "");
+      // const response = await api.post(
+      //   "/api/survey",
+      //   {
+      //     title,
+      //   }
+      // );
+
       const data = await response.json();
+
       setSurvey(data);
       setTitle(data.title);
       // setQuestions(data.questions);

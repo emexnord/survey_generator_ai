@@ -11,7 +11,7 @@ function DesktopNav() {
   const pathname = usePathname();
 
   const session = useSession();
-  console.log("session", session);
+  // console.log("session", session);
   return (
     <nav>
       <div className="md:flex gap-5">

@@ -1,13 +1,16 @@
 import { Question } from "../types/question.type";
 import { Response } from "../types/response.type";
 import { Answer } from "../types/answer.type";
+import { User } from "@/types/user.type";
 
 export interface GenerateSurveyDto {
   title: string;
+  userId: string;
 }
 
 export interface SurveyDto {
   id: string;
+  owner: Partial<User>;
   title: string;
   questions: Question[];
   responses?: Response[];
@@ -15,6 +18,7 @@ export interface SurveyDto {
 }
 
 export interface createSurveyDto {
+  userId: string;
   title: string;
   questions: Question[];
 }

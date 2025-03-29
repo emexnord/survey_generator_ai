@@ -9,32 +9,40 @@ import {
 import { Question } from "../types/question.type";
 import { Response } from "../types/response.type";
 import { generateSurveyQuestions } from "./ai";
+import { exclude } from "@/lib/utils";
 
 export async function createSurvey(
   data: GenerateSurveyDto
 ): Promise<SurveyDto> {
-  if (!data.title) throw new AppError("Title is required", 400);
+  if (!data.title || !data.userId)
+    throw new AppError("Title and userid is required", 400);
 
   // Generate questions using AI
   const questions = await generateSurveyQuestions(data.title);
 
   // Store in the database
-  const survey = await createSurveyInDb({ title: data.title, questions });
+  const survey = await createSurveyInDb({
+    userId: data.userId,
+    title: data.title,
+    questions,
+  });
 
   return {
     id: survey.id,
+    owner: exclude(survey.owner, ["password"]),
     title: survey.title,
     questions: survey.questions as Question[],
     createdAt: survey.createdAt,
   };
 }
 
-export async function getAllSurveys(): Promise<SurveyDto[]> {
+export async function getAllSurveys(userId: string): Promise<SurveyDto[]> {
   // Fetch all surveys from the database
-  const surveys = await getAllSurveysFromDb();
+  const surveys = await getAllSurveysFromDb(userId);
 
   return surveys.map((survey) => ({
     id: survey.id,
+    owner: exclude(survey.owner, ["password"]),
     title: survey.title,
     questions: survey.questions as Question[],
     responses: survey.responses as Response[],
@@ -53,6 +61,7 @@ export async function getSurveyById(id: string): Promise<SurveyDto> {
 
   return {
     id: survey.id,
+    owner: exclude(survey.owner, ["password"]),
     title: survey.title,
     questions: survey.questions as Question[],
     responses: survey.responses as Response[],

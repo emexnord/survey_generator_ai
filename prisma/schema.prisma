@@ -9,7 +9,8 @@ generator client {
 
 model Survey {
     id        String     @id @default(auto()) @map("_id") @db.ObjectId
-    owner     User       @relation(fields: [id], references: [id])
+    ownerId   String     @db.ObjectId // Foreign key for User
+    owner     User       @relation(fields: [ownerId], references: [id])
     title     String
     questions Json
     responses Response[]
