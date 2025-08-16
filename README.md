@@ -116,5 +116,5 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ## Next steps
 
-This app can be further modified into a full-fledged research helper application that facilitates the end-to-end research process by utilizing AI.
+This app can be further modified into a full-fledge research helper application that facilitates the end-to-end research process by utilizing AI. 
 ---
