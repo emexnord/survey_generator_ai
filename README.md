@@ -2,7 +2,7 @@
 
 ## 📌 Introduction
 
-**AI Survey Generator** is a Next.js application that allows users to input a title and generate five AI-driven questions of various types, such as:
+**AI Survey Generator** is a Next.js fullstack application that allows users to input a title and generate five AI-driven questions of various types, such as:
 
 - Multiple-choice questions
 - Short or long paragraph responses
@@ -114,4 +114,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 - **Dependency Injection** for better modularity and maintainability
 - **Strict TypeScript usage** (if applicable)
 
+## Next steps
+
+This app can be further modified into a full-fledge research helper application that facilitates the end-to-end research process by utilizing AI. 
 ---
