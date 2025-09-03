@@ -1,6 +1,5 @@
 import { AppError } from "@/errors";
 import { authenticateRequest, generateTokens } from "@/utils/jwt";
-import { login } from "@/utils/user_service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

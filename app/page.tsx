@@ -1,18 +1,19 @@
 import React from "react";
 import { BentoDemo } from "../components/bento-features";
-import GridPattern from "../components/ui/animted-grid";
-import { CTA } from "../components/cta";
+import OpenSourceSection from "../components/cta";
 import Hero from "@/components/Hero";
 import FloatingInput from "@/components/floating-input";
+import { DotPatternBackground } from "@/components/ui/dot-pattern";
 
 export default function Home() {
   return (
     <div className="w-full h-full">
       <div className="relative w-full h-screen">
-        <GridPattern
+        {/* <GridPattern
           width={70} // Set horizontal line spacing
           height={70} // Set vertical line spacing
-        />
+        /> */}
+        <DotPatternBackground />
 
         <section className="relative w-full h-[85dvh] z-10 pl-5">
           <Hero />
@@ -31,7 +32,7 @@ export default function Home() {
         <BentoDemo />
       </section>
 
-      <CTA />
+      <OpenSourceSection />
       <FloatingInput />
     </div>
   );

@@ -22,6 +22,14 @@ export async function POST(req: NextRequest) {
   try {
     const data: createResponseDto = await req.json();
 
+    const io = (global as any).io;
+
+    console.log("data", data);
+    console.log("Socket.io instance:", io);
+    io.on("connection", () => {
+      console.log("A user connected");
+    });
+
     const response = await createResponse({
       surveyId: data.surveyId,
       userEmail: data.userEmail,

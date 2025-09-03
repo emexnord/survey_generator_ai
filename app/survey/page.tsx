@@ -12,6 +12,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoSend, IoShareSocial } from "react-icons/io5";
+import { socket } from "../socket";
 
 export default function SurveyPage() {
   const session = useSession();
@@ -112,6 +113,10 @@ export default function SurveyPage() {
 
     if (title) {
       fetchSurvey(title);
+    }
+    if (session) {
+      socket.emit("authenticate", session.user.email);
+      console.log("Authenticated with socket:", session.user.email);
     }
     setLoading(false);
   }, [searchParams]);

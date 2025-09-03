@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import axios from "axios";
 
 const api = axios.create({
